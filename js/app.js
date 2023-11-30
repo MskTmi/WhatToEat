@@ -41,7 +41,7 @@ $(document).ready(function () {
             $(".punctuation").text("！");
             $("#start").find("span").text("换一个");
             clearTimeout(b);
-            document.title = "BizSnack | " + $(".title").text();
+            document.title = "Mst | " + $(".title").text();
         } else {
             i = 1;
             Reset++;
