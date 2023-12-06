@@ -281,7 +281,7 @@ body {
 
 .comment {
     position: absolute;
-    bottom: 60px;
+    bottom: 120px;
     left: 50%;
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
