@@ -1,161 +1,196 @@
-var i = 0;
-//早饭
-var breakfast = "面包 蛋糕 荷包蛋 烧饼 饽饽 肉夹馍 油条 馄饨 火腿 面条 小笼包 大笼包 玉米粥 肉包 煎饼果子 饺子 煎蛋 烧卖 生煎 锅贴 包子 酸奶 苹果 梨 香蕉 皮蛋瘦肉粥 蛋挞 南瓜粥 煎饼 玉米糊 泡面 粥 馒头 燕麦片 水煮蛋 米粉 豆浆 牛奶 花卷 豆腐脑 煎饼果子 小米粥 黑米糕 鸡蛋饼 牛奶布丁 水果沙拉 鸡蛋羹 南瓜馅饼 鸡蛋灌饼 奶香小馒头 汉堡包 披萨 八宝粥 三明治 蛋包饭 豆沙红薯饼 驴肉火烧 粥 粢饭糕 蒸饺 白粥".split(" ");
-//午饭/晚饭
-var lunch = "盖浇饭 砂锅 大排档 米线 满汉全席 西餐 麻辣烫 自助餐 炒面 快餐 水果 西北风 馄饨 火锅 烧烤 泡面 水饺 日本料理 涮羊肉 味千拉面 面包 扬州炒饭 自助餐 菜饭骨头汤 茶餐厅 海底捞 西贝莜面村 披萨 麦当劳 KFC 汉堡王 卡乐星 兰州拉面 沙县小吃 烤鱼 烤肉 海鲜 铁板烧 韩国料理 粥 快餐 萨莉亚 桂林米粉 东南亚菜 甜点 农家菜 川菜 粤菜 湘菜 本帮菜 全家便当".split(" ");
-//monster
-var abnormal = "冰箱 书桌 电扇 空调 马桶 翔 鼠标 键盘 显示器 电视 台灯 饭盒 iPad iPhone 手机 餐巾纸 电话 椅子 纸箱 窗帘 插座 被单 报纸 杂志 相框 照片 衣服 内裤 内衣 袜子 妹子 汉子 砖头 混凝土 钢筋 塑料袋 衣架 书 手环 手表 鼠标垫 眼药水 跑车 自行车 三轮车 坦克 潜水艇 飞机 火箭 U盘 CPU 显卡 刀片 碎玻璃 圆珠笔 钢笔 交通卡 银行卡 身份证 户口簿 橡皮筋 双面胶 502胶水 订书机 螺丝刀 锤子 榔头 垃圾桶 花花草草 树皮 洗手液 妇炎洁 姨妈巾 哆啦A梦 仙人掌 企鹅 大熊猫 穿山甲 米老鼠 唐老鸭 跳跳虎 旅行箱 DVD 音响 热水器 热水袋 电热棒 电池 充电器 相机 自拍杆 耳机 吊灯 雨伞 钱包 鞋子 人字拖 床垫 绣花针 戒指 窨井盖 路灯 主板 程序猿 工程狮 电线 摄像头 西北风 生活 路由器 洗手液 沐浴露 肥皂 羽毛球拍 保龄球 皮带 皮鞭 电池 牙膏 手电筒 瑜伽垫 假发 82年的自来水 马蜂窝 瑞士军刀 地板 水管 电钻".split(" ");
-//自定义大转盘
-var turntable = "冰激凌 奶茶 再来一次 汉堡王 麦麦 毛血旺 萨莉亚 薯条 钵钵鸡 川菜 **启动！".split(" ");
-//monster中的吐槽词
-var abnormalTease = "大哥，饶命啊大哥 吃吃吃，就知道吃 壮士，干了这碗热翔 就这，还不够我塞牙缝儿 莫慌，抱紧我 吃一个，长一斤 你帅你先吃 你胖你先吃 听说吃这玩意吃不胖 你先吃，我不饿 不吃不是中国人 配上鸡汤，口味更佳 我仿佛看到了盐水瓶 嗯，好吃么？ 饭后注意漱口哦 这菜红烧味道如何？ 饭后百步走，活到九十九 分享页面到朋友圈，可以获得30个QQ太阳 据说吃完99%都哭了 惊天内幕！这网页是逗你玩的 为了身边的朋友！！转！！！！ 我也是醉了 我想静静，不要问我静静是谁 解决吃什么难题哪家强？ 我就笑笑不说话 转发过100，然并卵 活到老，吃到老 我给你讲个笑话 你别哭喔 你知道怎样得精神分裂症吗？那样我就再不是一个人了。 天下没有不散的筵席。我都还没吃完，你们都走了。 吃不到的醋，最酸。 躲了一辈子的雨，雨会不会很难过 小猪一定不知道自己的肉很好吃吧，真替它们心酸。 作为一个胖子，居然还自称自己不是个粗人！ 心情不好就吃吃吃 念念不忘，必会下单 好吃不如饺子，好玩不过嫂子 别低头，哈喇子会掉 今晚我们都是吃货 我这叫圆润，不叫胖 这不叫胖，叫丰满！ 吃饭前记得用手机消消毒 集满20个赞，明天早起瘦10斤 好吃的不要不要的 不好吃，不要钱 吃的我蹲下起立就头晕 听说你是广东人？ 贝爷，卒。".split(" ");
-//默认时间
-var order = 2;
-//当前时间
-var Hours = (new Date).getHours();
-//重置次数
-var Reset = 0;
-var human = "human";
-var b, C, E, meal;
+let isPlaying = false;  // 控制是否在播放状态
+let randomTimeout;  // 保存setTimeout的返回值，用于清除
+let currentMode = "human";  // 当前模式 (human, monster, turntable)
+let resetCount = 0;  // 重置次数
+let currentOrder = 2;  // 默认当前时间的餐次 (0 = 早餐, 1 = 午餐, 2 = 晚餐)
+let screenWidth, screenHeight;
+let currentHour = (new Date()).getHours();
+let currentFoodPool = []; // 添加一个全局变量用于存储当前的食物池
+
+// 各模式的食物池
+const foodPools = {};
+
+// 各模式的吐槽语句
+const monsterTeases = ["大哥，饶命啊大哥", "吃吃吃，就知道吃", "壮士，干了这碗热翔", "就这，还不够我塞牙缝儿", "莫慌，抱紧我", "吃一个，长一斤", "你帅你先吃", "你胖你先吃", "听说吃这玩意吃不胖", "你先吃，我不饿", "不吃不是中国人", "配上鸡汤，口味更佳", "我仿佛看到了盐水瓶", "嗯，好吃么？", "饭后注意漱口哦", "这菜红烧味道如何？", "饭后百步走，活到九十九", "分享页面到朋友圈，可以获得30个QQ太阳", "据说吃完99%都哭了", "惊天内幕！这网页是逗你玩的", "为了身边的朋友！！转！！！！", "我也是醉了", "我想静静，不要问我静静是谁", "解决吃什么难题哪家强？", "我就笑笑不说话", "转发过100，然并卵", "活到老，吃到老", "我给你讲个笑话", "你别哭喔", "你知道怎样得精神分裂症吗？那样我就再不是一个人了。", "天下没有不散的筵席。我都还没吃完，你们都走了。", "吃不到的醋，最酸。", "躲了一辈子的雨，雨会不会很难过", "小猪一定不知道自己的肉很好吃吧，真替它们心酸。", "作为一个胖子，居然还自称自己不是个粗人！", "心情不好就吃吃吃", "念念不忘，必会下单", "好吃不如饺子，好玩不过嫂子", "别低头，哈喇子会掉", "今晚我们都是吃货", "我这叫圆润，不叫胖", "这不叫胖，叫丰满！", "吃饭前记得用手机消消毒", "集满20个赞，明天早起瘦10斤", "好吃的不要不要的", "不好吃，不要钱", "吃的我蹲下起立就头晕", "听说你是广东人？", "贝爷，卒"];
 
 $(document).ready(function () {
-    //打印控制台信息
+    // 打印控制台信息
     printProjectInfo();
 
-    $(".title").on("animationend webkitAnimationEnd", function (t) {
-        $(this).removeClass("shake")
-    })
+    // 初始化时间
+    if (currentHour < 9 || currentHour >= 23) {
+        currentOrder = 0; // 早饭
+    } else if (currentHour < 13) {
+        currentOrder = 1; // 午饭
+    } else {
+        currentOrder = 2; // 晚饭
+    }
 
-    $("#temp_container").on("animationend webkitAnimationEnd", function (t) {
-        $(t.target).remove()
-    })
+    // 更新餐次
+    updateMealForCurrentOrder(currentOrder);
+    // 更新食物池
+    selectMealPoolBasedOnMode();
 
+    $(".title").on("animationend webkitAnimationEnd", function () {
+        $(this).removeClass("shake");
+    });
+
+    $("#temp_container").on("animationend webkitAnimationEnd", function (e) {
+        $(e.target).remove();
+    });
+
+    // 开始/停止
     $("#start").click(function () {
-
-        $("body").toggleClass("playing", !i);
-        if (i) {
-            i = 0;
-            if ("monster" == human) {
-                $(".os").text(abnormalTease[randomNumber(abnormalTease.length)]);
+        $("body").toggleClass("playing", !isPlaying);
+        if (isPlaying) {
+            isPlaying = false;
+            if (currentMode === "monster") {
+                $(".os").text(monsterTeases[randomNumber(monsterTeases.length)]);
             }
             $(".punctuation").text("！");
             $("#start").find("span").text("换一个");
-            clearTimeout(b);
+            clearTimeout(randomTimeout);
             document.title = "Mst | " + $(".title").text();
         } else {
-            i = 1;
-            Reset++;
-            2 == Reset && tease("我就知道你会换一个 ( ͡° ͜ʖ ͡°)");
-            5 == Reset && tease("说，你是不是天秤座？Σ( ° △ °|||)︴");
-            10 == Reset && tease("你是吃了炫迈吗？(￣△￣；)");
-            20 == Reset && tease("难道你是处女座？(๑•̀ㅂ•́)و✧");
-            30 == Reset && tease("再换我可要报警了！( *・ω・)✄╰ひ╯");
+            isPlaying = true;
+            resetCount++;
+            handleTeases();
+            resetState();
+            //selectMealPoolBasedOnMode();
 
-            //重置状态
-            $(".today, .time, .eat").css("display", false)
-            //判断使用哪个数组
-            var pool = lunch
-            switch ($("div > .selected").data("type")) {
-                case "human":
-                    if (order == 0) {
-                        pool = breakfast
-                    }
-                    break;
-                case "monster":
-                    pool = abnormal;
-                    break;
-                case "turntable":
-                    pool = turntable;
-                    //隐藏一些内容
-                    $(".today, .time, .eat").css("display", "none")
-                    break;
-            }
-
-            $(".punctuation").text("？"), $("#start").find("span").text("停"), $(".os").text(""),
-                function o() {
-                    var e = randomNumber(pool.length) - 1,
-                        item = pool[e],
-                        a = randomNumber(C),
-                        c = randomNumber(E - 50),
-                        l = randomNumber(37, 14);
-                    $(".what").text(item);
-                    var m = $("<span class='temp'>" + item + "</span>").css({
-                        top: a,
-                        left: c,
-                        color: "rgba(0,0,0," + randomNumber(7, 3) / 10 + ")",
-                        fontSize: l + "px"
-                    }).appendTo($("#temp_container"));
-                    b = setTimeout(o, 60)
-                }()
+            $(".punctuation").text("？");
+            $("#start").find("span").text("停");
+            $(".os").text("");
+            triggerRandomFoodDisplay();
         }
-    })
+    });
 
+    // 模式切换
     $("#toggle span").click(function () {
-        //添加selected
+        // 添加selected类
         $(this).addClass("selected").siblings().removeClass("selected");
-        //添加色块
+        // 更新色块
         $("#colorBlock").removeClass().addClass($(this).data("type"));
-        human = $(this).data("type");
-        Reset = 0;
-    })
+        currentMode = $(this).data("type");
+        resetCount = 0;
+        // 更新食物池
+        selectMealPoolBasedOnMode();
+    });
 
-    //当前时间
-    if (9 > Hours || Hours >= 23) {
-        order = 0;
-    } else if (13 > Hours) {
-        order = 1;
-    } else {
-        order = 2;
-    }
-    SwitchMeal(order)
-
-    // 为标题元素绑定点击事件
+    // 餐次切换
     $(".title").click(function () {
-        order++;
-        if (order > 2) {
-            order = 0;
+        currentOrder++;
+        if (currentOrder > 2) {
+            currentOrder = 0;
         }
-        SwitchMeal(order);
-    })
 
-    $("#ribbon").click(function () {
-        return alert(this.$(".title")), !1
-    })
+        // 更新餐次
+        updateMealForCurrentOrder(currentOrder);
+        // 更新食物池
+        selectMealPoolBasedOnMode();
+    });
 
+    // 窗口变化时更新屏幕宽高
     $(window).resize(function () {
-        E = $(window).width(), C = $(window).height()
-    }).resize()
-
+        screenWidth = $(window).width();
+        screenHeight = $(window).height();
+    }).resize();
 });
 
-function randomNumber(t, e) {
-    return t = t || 100, e = e || 0, Math.ceil(Math.random() * (t - e) + e)
+// 随机数生成函数
+function randomNumber(max = 100, min = 0) {
+    return Math.ceil(Math.random() * (max - min) + min);
 }
 
-function tease(t) {
-    var e = $("<div class='comment'>" + t + "</div>");
-    e.on("animationend webkitAnimationEnd", function (t) {
-        $(this).remove()
-    }).appendTo($("body"))
+
+// 处理每次切换食物时的吐槽
+function handleTeases() {
+    if (resetCount === 2) tease("我就知道你会换一个 ( ͡° ͜ʖ ͡°)");
+    if (resetCount === 5) tease("说，你是不是天秤座？Σ( ° △ °|||)︴");
+    if (resetCount === 10) tease("你是吃了炫迈吗？(￣△￣；)");
+    if (resetCount === 20) tease("难道你是处女座？(๑•̀ㅂ•́)و✧");
+    if (resetCount === 30) tease("再换我可要报警了！( *・ω・)✄╰ひ╯");
 }
 
-function SwitchMeal(time) {
-    var meals = ["早上", "中午", "晚上"];
-    if (!i) {
-        $(".time").text(meals[time]);
+// 重置状态
+function resetState() {
+    $(".today, .time, .eat").show();
+    $(".what").text("神马");
+    $(".punctuation").text("？");
+    $(".title").addClass("shake");
+}
+
+// 切换食物池
+function selectMealPoolBasedOnMode() {
+    // 如果食物池已存在，则直接切换
+    if (foodPools[currentMode]) {
+        currentFoodPool = foodPools[currentMode][currentOrder === 0 ? "breakfast" : (currentOrder === 1 ? "lunch" : "dinner")];
+        return;
+    }
+
+    // 如果食物池不存在，则发起请求加载
+    fetch(`/foodData/${currentMode}.json`)
+        .then(response => response.json())
+        .then(data => {
+            // 将从 JSON 获取到的食物池赋给当前食物池
+            foodPools[currentMode] = data;
+            currentFoodPool = foodPools[currentMode][currentOrder === 0 ? "breakfast" : (currentOrder === 1 ? "lunch" : "dinner")];
+        })
+        .catch(error => {
+            console.error(`Error loading ${currentMode}.json:`, error);
+        });
+}
+
+
+// 触发随机食物显示
+function triggerRandomFoodDisplay() {
+    function displayRandomFood() {
+        let foodIndex = randomNumber(currentFoodPool.length) - 1;
+        let foodItem = currentFoodPool[foodIndex];
+        let positionTop = randomNumber(screenHeight);
+        let positionLeft = randomNumber(screenWidth - 50);
+        let fontSize = randomNumber(37, 14);
+
+        $(".what").text(foodItem);
+        let tempElement = $("<span class='temp'>" + foodItem + "</span>").css({
+            top: positionTop,
+            left: positionLeft,
+            color: "rgba(0,0,0," + randomNumber(7, 3) / 10 + ")",
+            fontSize: fontSize + "px"
+        }).appendTo($("#temp_container"));
+
+        randomTimeout = setTimeout(displayRandomFood, 60);
+    }
+
+    displayRandomFood();
+}
+
+// 更新餐次
+function updateMealForCurrentOrder(order) {
+    const mealTimes = ["早上", "中午", "晚上"];
+    if (!isPlaying) {
+        $(".time").text(mealTimes[order]);
         $(".what").text("神马");
         $(".punctuation").text("？");
         $(".title").addClass("shake");
-        Reset = 0;
+        resetCount = 0;
 
-        var prompt = $(".tip").show();
+        const prompt = $(".tip").show();
         setTimeout(function () {
-            prompt.remove()
-        }, 4e3)
-
+            prompt.remove();
+        }, 4000);
     }
 }
 
+// 吐槽函数
+function tease(message) {
+    const comment = $("<div class='comment'>" + message + "</div>");
+    comment.on("animationend webkitAnimationEnd", function () {
+        $(this).remove();
+    }).appendTo($("body"));
+}
+
+// 开源信息
 function printProjectInfo() {
     var license = "MIT License";
     var github = "https://github.com/MskTmi/WhatToEat";
@@ -168,5 +203,3 @@ function printProjectInfo() {
 
     console.groupEnd();
 }
-
-
