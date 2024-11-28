@@ -1,6 +1,6 @@
 let isPlaying = false;  // 控制是否在播放状态
 let randomTimeout;  // 保存setTimeout的返回值，用于清除
-let currentMode = "human";  // 当前模式 (human, monster, turntable)
+let currentMode = "human";  // 默认为人类模式
 let resetCount = 0;  // 重置次数
 let currentOrder = 2;  // 默认当前时间的餐次 (0 = 早餐, 1 = 午餐, 2 = 晚餐)
 let screenWidth, screenHeight;
@@ -44,23 +44,30 @@ $(document).ready(function () {
         $("body").toggleClass("playing", !isPlaying);
         if (isPlaying) {
             isPlaying = false;
+            clearTimeout(randomTimeout);
+
+            // 显示吐槽
             if (currentMode === "monster") {
                 $(".os").text(monsterTeases[randomNumber(monsterTeases.length)]);
             }
+            
+            // 显示随机到的食物
             $(".punctuation").text("！");
             $("#start").find("span").text("换一个");
-            clearTimeout(randomTimeout);
             document.title = "Mst | " + $(".title").text();
         } else {
             isPlaying = true;
-            resetCount++;
-            handleTeases();
-            resetState();
-            //selectMealPoolBasedOnMode();
-
-            $(".punctuation").text("？");
+            
+            // 每次切换食物时的吐槽
+            handleTeases(++resetCount);
+            
+            // 重置标题
+            resetTitle();
+            
             $("#start").find("span").text("停");
             $(".os").text("");
+
+            // 触发随机食物显示
             triggerRandomFoodDisplay();
         }
     });
@@ -71,10 +78,11 @@ $(document).ready(function () {
         $(this).addClass("selected").siblings().removeClass("selected");
         // 更新色块
         $("#colorBlock").removeClass().addClass($(this).data("type"));
+        // 更新模式
         currentMode = $(this).data("type");
-        resetCount = 0;
         // 更新食物池
         selectMealPoolBasedOnMode();
+        resetCount = 0;
     });
 
     // 餐次切换
@@ -102,18 +110,17 @@ function randomNumber(max = 100, min = 0) {
     return Math.ceil(Math.random() * (max - min) + min);
 }
 
-
 // 处理每次切换食物时的吐槽
-function handleTeases() {
-    if (resetCount === 2) tease("我就知道你会换一个 ( ͡° ͜ʖ ͡°)");
-    if (resetCount === 5) tease("说，你是不是天秤座？Σ( ° △ °|||)︴");
-    if (resetCount === 10) tease("你是吃了炫迈吗？(￣△￣；)");
-    if (resetCount === 20) tease("难道你是处女座？(๑•̀ㅂ•́)و✧");
-    if (resetCount === 30) tease("再换我可要报警了！( *・ω・)✄╰ひ╯");
+function handleTeases(count) {
+    if (count === 2) tease("我就知道你会换一个 ( ͡° ͜ʖ ͡°)");
+    if (count === 5) tease("说，你是不是天秤座？Σ( ° △ °|||)︴");
+    if (count === 10) tease("你是吃了炫迈吗？(￣△￣；)");
+    if (count === 20) tease("难道你是处女座？(๑•̀ㅂ•́)و✧");
+    if (count === 30) tease("再换我可要报警了！( *・ω・)✄╰ひ╯");
 }
 
-// 重置状态
-function resetState() {
+// 重置标题
+function resetTitle() {
     $(".today, .time, .eat").show();
     $(".what").text("神马");
     $(".punctuation").text("？");
@@ -129,7 +136,7 @@ function selectMealPoolBasedOnMode() {
     }
 
     // 如果食物池不存在，则发起请求加载
-    fetch(`/foodData/${currentMode}.json`)
+    fetch(`/foodData/${currentMode}.json`) // 模式名要与文件名一致
         .then(response => response.json())
         .then(data => {
             // 将从 JSON 获取到的食物池赋给当前食物池
@@ -142,7 +149,7 @@ function selectMealPoolBasedOnMode() {
 }
 
 
-// 触发随机食物显示
+// 随机食物显示
 function triggerRandomFoodDisplay() {
     function displayRandomFood() {
         let foodIndex = randomNumber(currentFoodPool.length) - 1;
