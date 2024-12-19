@@ -74,17 +74,35 @@ $(document).ready(function () {
 
     // 模式切换
     $("#toggle span").click(function () {
-        // 添加selected类
+        // 添加 selected 类
         $(this).addClass("selected").siblings().removeClass("selected");
-        // 更新色块
-        $("#colorBlock").removeClass().addClass($(this).data("type"));
+    
+        // 获取当前 span 的宽度和位置
+        const $this = $(this);
+        const $colorBlock = $("#colorBlock");
+    
+        const blockWidth = $this.outerWidth(); // 动态计算宽度
+        const blockLeft = $this.position().left; // 获取相对父级的左偏移
+        const blockTop = $this.position().top; // 获取相对父级的顶部偏移
+    
+        // 更新色块位置和大小
+        $colorBlock.css({
+            width: `${blockWidth}px`,
+            left: `${blockLeft}px`,
+            top: `${blockTop}px`, // 确保在多行时正确跟随
+            backgroundColor: $this.data("color"), // 根据 data-color 设置色块背景色
+        });
+    
         // 更新模式
-        currentMode = $(this).data("type");
+        currentMode = $this.data("type");
+    
         // 更新食物池
         selectMealPoolBasedOnMode();
+    
+        // 重置计数
         resetCount = 0;
     });
-
+    
     // 餐次切换
     $(".title").click(function () {
         currentOrder++;
